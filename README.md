@@ -19,7 +19,7 @@ git clone https://github.com/TheRealSyalin/HotReload.git
 pip3 install pipreqs
 ```
 
-![alt text](Assets/image.png)
+![alt text](App/Assets/image.png)
 
 ```
 pipreqs -r path\to\requirements.txt
