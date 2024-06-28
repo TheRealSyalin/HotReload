@@ -27,7 +27,7 @@ pipreqs -r path\to\requirements.txt
 
 # Use
 
-(Recomended)
+(Recommended)
 ```
 python HotReload.py C:\Users\User\MyWebsite
 ```
