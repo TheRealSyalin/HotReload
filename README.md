@@ -5,7 +5,7 @@
 # Project
 
 * Python 3.12.4
-* Widnows only ftm
+* Windows only ftm
 * third thing
 
 # Setup
