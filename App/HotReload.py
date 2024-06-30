@@ -29,13 +29,13 @@ def Close():
 window.protocol("WM_DELETE_WINDOW", Close)
 window.protocol("WM_CLOSE", Close)
 
-path_feild = tkinter.Text(window, height = 1, width = 40)
-path_feild.pack()
-path_feild.insert(tkinter.END, "project path")
+path_field = tkinter.Text(window, height = 1, width = 40)
+path_field.pack()
+path_field.insert(tkinter.END, "project path")
 
-url_feild = tkinter.Text(window, height = 1, width = 40)
-url_feild.pack()
-url_feild.insert(tkinter.END, "url")
+url_field = tkinter.Text(window, height = 1, width = 40)
+url_field.pack()
+url_field.insert(tkinter.END, "url")
 
 
 driver = webdriver.Chrome()
@@ -63,8 +63,8 @@ def CollectFiles():
 def TryConnect():
     global path_to_track, url
 
-    path_to_track = path_feild.get("1.0", 'end-1c')
-    url = url_feild.get("1.0", 'end-1c')
+    path_to_track = path_field.get("1.0", 'end-1c')
+    url = url_field.get("1.0", 'end-1c')
 
     if not os.path.exists(path_to_track):
          return
