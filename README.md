@@ -5,7 +5,7 @@
 # Project
 
 * Python 3.12.4
-* 2nd thing
+* Widnows only ftm
 * third thing
 
 # Setup
@@ -40,4 +40,25 @@ python HotReload.py
 
 ![alt text](App/Assets/image2.png)
 
+# Build
 
+* install pyinstaller
+* run and configure pyinstaller command
+
+```
+pyinstaller --noconsole -F HotReload.py
+```
+
+# distribution
+
+in App\dist is an exe and bat file. you can add the bat file to PATH and run the commands
+
+
+```
+hreload run path\to\projectfiles
+hreload run
+```
+
+```
+hreload stop
+```
