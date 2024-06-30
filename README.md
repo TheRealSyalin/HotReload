@@ -37,5 +37,6 @@ python HotReload.py C:\Users\User\MyWebsite
 python HotReload.py
 ```
 
+![alt text](App/Assets/image2.png)
 
-
+* Press Connect
