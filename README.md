@@ -40,4 +40,4 @@ python HotReload.py
 
 ![alt text](App/Assets/image2.png)
 
-* Press Connect
+
