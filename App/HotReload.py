@@ -6,7 +6,7 @@ import os
 import tkinter
 
 running = True
-path_to_track = "None"
+path_to_track = "project path"
 url = ""
 
 if len(argv) > 1:
@@ -31,7 +31,7 @@ window.protocol("WM_CLOSE", Close)
 
 path_field = tkinter.Text(window, height = 1, width = 40)
 path_field.pack()
-path_field.insert(tkinter.END, "project path")
+path_field.insert(tkinter.END, path_to_track)
 
 url_field = tkinter.Text(window, height = 1, width = 40)
 url_field.pack()
@@ -94,11 +94,11 @@ def Application():
             window.update()
             sleep(0.1)
         else:    
-            for key in file_dirs:
-                k, v = list(file_dirs.items())[0]
-                if not v == os.stat(k).st_mtime:
+            k, v = list(file_dirs.items())[0]
+            if not v == os.stat(k).st_mtime:
                     CollectFiles()
                     driver.refresh()
+            for key in file_dirs:
                 if not file_dirs[key] == os.stat(key).st_mtime:
                     print(key + " updated")
                     file_dirs[key] = os.stat(key).st_mtime
