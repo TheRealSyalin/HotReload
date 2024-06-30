@@ -11,7 +11,7 @@
 # Setup
 
 * clone the repo
-* create virtual
+* create virtual environment
 * install requirements.txt
 
 ```
@@ -27,6 +27,7 @@ pipreqs -r path\to\requirements.txt
 
 # Use
 
+(Recommended)
 ```
 python HotReload.py C:\Users\User\MyWebsite
 ```
