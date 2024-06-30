@@ -11,7 +11,7 @@
 # Setup
 
 * clone the repo
-* create virtual
+* create virtual environment
 * install requirements.txt
 
 ```
