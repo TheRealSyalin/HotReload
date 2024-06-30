@@ -46,6 +46,7 @@ python HotReload.py
 * run and configure pyinstaller command
 
 ```
+pip install pyinstaller
 pyinstaller --noconsole -F HotReload.py
 ```
 
