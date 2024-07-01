@@ -26,8 +26,15 @@ def Close():
      window.destroy()
      running = False
 
+def Close2():
+     global running 
+     
+     driver.quit()
+     window.destroy()
+     running = False
+
 window.protocol("WM_DELETE_WINDOW", Close)
-window.protocol("WM_CLOSE", Close)
+window.protocol("WM_CLOSE", Close2)
 
 path_field = tkinter.Text(window, height = 1, width = 40)
 path_field.pack()
