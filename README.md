@@ -5,7 +5,7 @@
 # Project
 
 * Python 3.12.4
-* Widnows only ftm
+* Windows only ftm
 * third thing
 
 # Setup
@@ -46,6 +46,7 @@ python HotReload.py
 * run and configure pyinstaller command
 
 ```
+pip install pyinstaller
 pyinstaller --noconsole -F HotReload.py
 ```
 
