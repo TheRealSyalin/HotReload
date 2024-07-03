@@ -1,5 +1,4 @@
 from watchdog import events, observers
-import os
 
 class FileWatcher(events.FileSystemEventHandler):
     def on_modified(self, event) -> None:

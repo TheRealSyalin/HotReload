@@ -1,10 +1,8 @@
 from sys import argv
-from sys import platform
 from selenium import webdriver
-from os import walk
 from time import sleep
 from FileWatcher import FileWatcher
-import os
+from os import path
 import tkinter
 import signal
 
@@ -14,8 +12,6 @@ url = ""
 
 if len(argv) > 1:
      path_to_track = argv[1]
-
-file_dirs = {path_to_track: float(1)}
 
 window = tkinter.Tk()
 window.geometry("600x200")
@@ -46,7 +42,7 @@ def TryConnect():
     path_to_track = path_field.get("1.0", 'end-1c')
     url = url_field.get("1.0", 'end-1c')
 
-    if not os.path.exists(path_to_track):
+    if not path.exists(path_to_track):
          return
     
     try:
@@ -64,25 +60,26 @@ def Application():
 
     fw = FileWatcher()
     check = True
-    while running:
-        
+    try:
+        while running:
+            if path.exists(path_to_track):
+                if not fw.ob.is_alive():
+                    fw.ob.schedule(fw, path_to_track, recursive=True)
+                    fw.ob.start()
 
-        if os.path.exists(path_to_track):
-            if not fw.ob.is_alive():
-                fw.ob.schedule(fw, path_to_track, recursive=True)
-                fw.ob.start()
-
-                print(fw.ob.is_alive())
-
-            if fw.is_modified:
+                if fw.is_modified:
                     driver.refresh()
 
-            print(fw.is_modified)
-            fw.is_modified = False
-        window.update_idletasks()
-        window.update()
-        sleep(0.1)
+                fw.is_modified = False
+
+            window.update_idletasks()
+            window.update()
+            sleep(0.1)
     
+    except Exception as ex:
+        print("Fatal error: " + ex)
+        input("press any to close")
+
     driver.quit()
     window.destroy()
     fw.ob.stop()
