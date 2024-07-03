@@ -5,7 +5,7 @@
 # Project
 
 * Python 3.12.4
-* Windows only ftm
+* Theoretically Cross-Platform (Untested (i only have windows (fuck off)))
 * third thing
 
 # Setup

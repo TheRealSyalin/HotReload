@@ -1,2 +1,2 @@
 selenium==4.22.0
-
+watchdog==4.0.1

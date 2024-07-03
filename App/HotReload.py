@@ -1,9 +1,12 @@
 from sys import argv
+from sys import platform
 from selenium import webdriver
 from os import walk
 from time import sleep
+from FileWatcher import FileWatcher
 import os
 import tkinter
+import signal
 
 running = True
 path_to_track = "project path"
@@ -18,23 +21,13 @@ window = tkinter.Tk()
 window.geometry("600x200")
 window.title("Hot Reload")
 
-
 def Close():
      global running 
      
-     driver.quit()
-     window.destroy()
      running = False
 
-def Close2():
-     global running 
-     
-     driver.quit()
-     window.destroy()
-     running = False
-
+signal.signal(signal.SIGTERM, Close)
 window.protocol("WM_DELETE_WINDOW", Close)
-window.protocol("WM_CLOSE", Close2)
 
 path_field = tkinter.Text(window, height = 1, width = 40)
 path_field.pack()
@@ -47,26 +40,6 @@ url_field.insert(tkinter.END, "url")
 
 driver = webdriver.Chrome()
 
-def CollectFiles():
-    global path_to_track, file_dirs
-
-    if not os.path.exists(path_to_track):
-         return
-    
-    file_dirs.clear()
-    file_dirs[path_to_track] = os.stat(path_to_track).st_mtime
-    path = path_to_track
-    
-
-    for (path, dirnames, filenames) in walk(path):
-            for file in filenames:
-                if str(file).endswith(tuple([".html", ".js", ".css"])):
-                    file_dirs[path + "\\" + file] = os.stat(path + "\\" + file).st_mtime
-
-    #for k in file_dirs:
-         #print(k + "\n")
-
-
 def TryConnect():
     global path_to_track, url
 
@@ -75,8 +48,6 @@ def TryConnect():
 
     if not os.path.exists(path_to_track):
          return
-    
-    CollectFiles()
     
     try:
         driver.get(url)
@@ -91,33 +62,34 @@ button.place(x=250, y=100)
 def Application():
     global path_to_track
 
-    
+    fw = FileWatcher()
     check = True
     while running:
         
 
-        if not os.path.exists(path_to_track):
-            window.update_idletasks()
-            window.update()
-            sleep(0.1)
-        else:    
-            k, v = list(file_dirs.items())[0]
-            if not v == os.stat(k).st_mtime:
-                    CollectFiles()
-                    driver.refresh()
-            for key in file_dirs:
-                if not file_dirs[key] == os.stat(key).st_mtime:
-                    print(key + " updated")
-                    file_dirs[key] = os.stat(key).st_mtime
+        if os.path.exists(path_to_track):
+            if not fw.ob.is_alive():
+                fw.ob.schedule(fw, path_to_track, recursive=True)
+                fw.ob.start()
+
+                print(fw.ob.is_alive())
+
+            if fw.is_modified:
                     driver.refresh()
 
+            print(fw.is_modified)
+            fw.is_modified = False
         window.update_idletasks()
         window.update()
         sleep(0.1)
-
+    
+    driver.quit()
+    window.destroy()
+    fw.ob.stop()
+    fw.ob.join()
 
 if __name__ == "__main__":
     Application()
      
-     
+    
 
